@@ -196,7 +196,7 @@ def threatcrowd(email):
             result[str(i)] = [[center_point[0], center_point[1], find_domain(center_point)]]
 
             for k in range(0, len(C[i])):
-                if k != index and k <= 3:
+                if k < 3:
                     # Store first 3 non-center domains
                     result[str(i)].append([C[i][k][0], C[i][k][1], find_domain(C[i][k])])
 
