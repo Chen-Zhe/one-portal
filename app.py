@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory
 import requests, re, json
 
 app = Flask(__name__)
@@ -53,6 +53,11 @@ def vt_hash(input):
 
     except Exception as e:
         return render_template("virustotal.html", text="error")
+
+
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory('static', path)
 
 if __name__ == "__main__":
     app.run()
