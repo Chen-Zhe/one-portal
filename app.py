@@ -64,10 +64,9 @@ def vt_hash(input):
     except Exception as e:
         return render_template("vt-hash.html", text="Error: Please try again.")
 
-
-@app.route('/static/<path:path>')
-def send_static(path):
-    return send_from_directory('static', path)
+@app.route('/assets/<path:path>')
+def static_file(path):
+    return send_from_directory("assets",path)
 
 if __name__ == "__main__":
     app.run()

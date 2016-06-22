@@ -1,15 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/assets/img/favicon.ico">
+
     <title>{% block title %}{% endblock %} - One Portal</title>
-</head>
-{% block script %}
 
-{% endblock %}
-<body>
-{% block body %}
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/css/bootstrap.css" rel="stylesheet">
 
-{% endblock %}
-</body>
+    <!-- Custom styles for this template -->
+    <link href="/assets/css/ionicons.min.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div id="h">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 centered">
+            <h1>One Portal</h1>
+            <div class="mtb">
+
+
+              <form role="form" action="register.php" method="post" enctype="plain">
+                <input type="email" name="email" class="subscribe-input" placeholder="Enter your e-mail address..." required>
+                <button class='btn btn-conf btn-green' type="submit">Sart your free trial</button>
+              </form>
+
+
+            </div><!--/mt-->
+            <h3>Cyber Security</h3>
+          </div>
+        </div><!--/row-->
+      </div><!--/container-->
+    </div><!-- /H -->
+
+    <div class="container ptb">
+      <div class="row">
+        <h2 class="mb">Result</h2>
+
+
+
+
+         <div class="col-md-8 col-md-offset-2">
+    {% block body %}
+          {% endblock %}
+        </div><!--/col-md-4-->
+      </div><!--/row-->
+    </div><!--/container-->
+
+
+    <div id="f">
+      <div class="container">
+        <div class="row centered">
+          <h2>Proudly Presented by Team DAGE</h2>
+        </div><!--/row-->
+      </div><!--/container-->
+    </div><!--/F-->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/retina-1.1.0.js"></script>
+  </body>
 </html>
