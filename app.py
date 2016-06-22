@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import requests, re, json
+from virus_total_apis import PublicApi as VirusTotalPublicApi
 
 app = Flask(__name__)
 
@@ -56,3 +57,34 @@ def vt_hash(input):
 
 if __name__ == "__main__":
     app.run()
+
+
+# @app.route("/exp/<input>")
+# def exp(input):
+#     try:
+#         input_list = [input_item.strip() for input_item in input.split(',')]
+#         bit_pattern = re.compile("(http:\/\/)?bit.ly\/[a-zA-Z0-9]*")
+#         goo_pattern = re.compile("(http:\/\/)?goo.gl\/[a-zA-Z0-9]*")
+#
+#         for shortened_url in input_list:
+#             if goo_pattern.match(shortened_url):
+#                 if (shortened_url.find("https://") == -1):
+#                     shortened_url = "https://" + shortened_url
+#                 response = requests.get('https://www.googleapis.com/urlshortener/v1/url',
+#                                         params={'shortUrl': shortened_url,
+#                                                 'key': 'AIzaSyBMDM8HM2_K5FHQH14SZIW2sRsvBb3QIo0'})
+#                 return render_template("expander.html", text=response.text)
+#             elif bit_pattern.match(shortened_url):
+#                 if (shortened_url.find("http://") == -1):
+#                     shortened_url = "http://" + shortened_url
+#                 response = requests.get('https://api-ssl.bitly.com/v3/expand',
+#                                         params={'shortUrl': shortened_url,
+#                                                 'access_token': '369ebc3d0584dceac891e5fcc457eada2d24c1a3',
+#                                                 'format': 'txt'})
+#                 return render_template("expander.html", text=response.text)
+#
+#             else:
+#                 raise Exception()
+#
+#     except Exception as e:
+#         return render_template("expander.html", text="error")
