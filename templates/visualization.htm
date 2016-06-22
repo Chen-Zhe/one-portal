@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>threatcrowd</title>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+</head>
+
+<body>
+	<script>
+
+
+		//d3.json("/Users/panjingyuan/Desktop/sample_data.json", function (data){
+
+
+			input_data=JSON.parse('{{ data|safe }}');
+
+
+			
+			var svgContainer = d3.select("body").append("svg")
+                	                     .attr("width", 1000)
+                	                     .attr("height",1000);
+
+
+
+			//var spaceCircles = [[-30,60],[0,0,"center"],[-20,20]];
+			var spaceCircles_0 = [[input_data[0][0][0],input_data[0][0][1]],
+								[input_data[0][1][0],input_data[0][1][1]],
+								[input_data[0][2][0],input_data[0][2][1]],
+								[input_data[0][3][0],input_data[0][3][1]],
+								[input_data[1][0][0],input_data[1][0][1]],
+								[input_data[1][1][0],input_data[1][1][1]],
+								[input_data[1][2][0],input_data[1][2][1]],
+								[input_data[1][3][0],input_data[1][3][1]],
+								[input_data[2][0][0],input_data[2][0][1]],
+								[input_data[2][1][0],input_data[2][1][1]],
+								[input_data[2][2][0],input_data[2][2][1]],
+								[input_data[2][3][0],input_data[2][3][1]],
+
+								]
+
+
+
+
+ 
+ 			var circles = svgContainer.selectAll("circle")
+                	           .data(spaceCircles_0)
+                	           .enter()
+                	           .append("g")
+                               .attr("transform", "translate(500,500)")
+                    	       .append("circle");
+
+			var circleAttributes = circles
+                	       .attr("cx", function (d) { return d[0]*2; })
+                	       .attr("cy", function (d) { return d[1]*2; })
+                	       .attr("r", 10)
+                    	   .style("fill", "green");
+
+            //The data for our line
+            var lineData0=[[input_data[0][1][0],input_data[0][1][1]],[input_data[0][0][0],input_data[0][0][1]],
+            			  [input_data[0][2][0],input_data[0][2][1]],[input_data[0][0][0],input_data[0][0][1]],
+            			  [input_data[0][3][0],input_data[0][3][1]],[input_data[0][0][0],input_data[0][0][1]]];
+
+            var lineData1=[
+            			  [input_data[1][1][0],input_data[1][1][1]],[input_data[1][0][0],input_data[1][0][1]],
+            			  [input_data[1][2][0],input_data[1][2][1]],[input_data[1][0][0],input_data[1][0][1]],
+            			  [input_data[1][3][0],input_data[1][3][1]],[input_data[1][0][0],input_data[1][0][1]]];
+
+            var lineData2=[
+
+            			  [input_data[2][1][0],input_data[2][1][1]],[input_data[2][0][0],input_data[2][0][1]],
+            			  [input_data[2][2][0],input_data[2][2][1]],[input_data[2][0][0],input_data[2][0][1]],
+            			  [input_data[2][3][0],input_data[2][3][1]],[input_data[2][0][0],input_data[2][0][1]]
+
+            			  ];
+
+			var g = svgContainer.append("svg:g")
+    				.attr("transform", "translate(500, 500)");
+
+           	var lineF = d3.svg.line()
+                	          .x(function(d) { return d[0]*2; })
+                    	      .y(function(d) { return d[1]*2; });
+
+            g.append("svg:path").attr("d", lineF(lineData0))
+                	            .attr("stroke", "purple")
+                        	    .attr("stroke-width", 2)
+                            	.attr("fill", "none");
+
+            g.append("svg:path").attr("d", lineF(lineData1))
+                	            .attr("stroke", "blue")
+                        	    .attr("stroke-width", 2)
+                            	.attr("fill", "none");
+
+            g.append("svg:path").attr("d", lineF(lineData2))
+                	            .attr("stroke", "red")
+                        	    .attr("stroke-width", 2)
+                            	.attr("fill", "none");
+
+
+            
+
+            
+
+
+            /*var lineFunction = d3.svg.line()
+                	          .x(function(d) { return d[0]*2; })
+                    	      .y(function(d) { return d[1]*2; })
+                        	 .interpolate("linear");
+
+			var lineGraph = svgContainer.append("g")
+                               	.attr("transform", "translate(500,500)")
+								.append("path")
+                	            .attr("d", lineFunction(lineData))
+                	            .attr("stroke", "purple")
+                        	    .attr("stroke-width", 2)
+                            	.attr("fill", "none");*/
+
+
+
+
+
+           	var group0=input_data[0].slice(0,4)
+           	var group1=input_data[1].slice(0,4)
+           	var group2=input_data[2].slice(0,4)
+
+           	var textdata=group0.concat(group1,group2)
+ 
+
+
+
+//Add the SVG Text Element to the svgContainer
+			var text = svgContainer
+						.append("g")
+                        .attr("transform", "translate(500,500)")
+						.selectAll("text")
+                        .data(textdata)
+                        .enter()
+                        .append("text");
+                        //.append("g")
+                        //.attr("transform", "translate(10,10)");
+
+//Add SVG Text Element Attributes
+			var textLabels = text
+				//.append("g")
+                //.attr("transform", "translate(500,200)")
+                .attr("x", function(d) { return d[0]*2; })
+                .attr("y", function(d) { return d[1]*2-5; })
+                .text( function (d) { return d[2]; })
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "10px")
+                .attr("text-anchor", "middle")
+                .attr("fill", "black");
+
+ 
+
+
+
+
+                
+
+
+	</script>
+
+
+
+
+</body>
+</html>
