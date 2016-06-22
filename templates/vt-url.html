@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <p1><b>URL:</b> {{ url_request }} </p1>
+    <br>
+    <p1><b>Scan date:</b> {{ scan_date }} </p1>
+    <br>
+    <p1><b>Detection rate:</b> {{ positives }} out of {{ total }}</p1>
+    <br>
+    <p1><b>Permalink:</b> {{ link }}</p1>
+
+{% endblock %}
