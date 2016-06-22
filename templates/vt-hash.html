@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    {{ text }}
+    <p1><b>Scan date:</b> {{ sd }} </p1>
+    <br>
+    <p1><b>Postivies:</b> {{ pos }} </p1>
+    <br>
+    <p1><b>Total:</b> {{ total }} </p1>
+    <br>
+    <p1><b>MD5:</b> {{ md5 }}</p1>
+    <br>
+    <p1><b>SHA1:</b> {{ sha1 }}</p1>
+    <br>
+    <p1><b>Permalink:</b> {{ link }}</p1>
+{% endblock %}

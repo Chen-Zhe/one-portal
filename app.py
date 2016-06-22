@@ -37,10 +37,14 @@ def vt_url(input):
         input_list = [input_item.strip() for input_item in input.split(',')]
         for ip in input_list:
             scan_report = vt.get_url_report(ip)
-            return render_template("virustotal.html", text=scan_report)
+            return render_template("vt-url.html", url_request=scan_report.get("results").get("url").replace(":", "[:]").replace(".", "[.]"),
+                                   scan_date=scan_report.get("results").get("scan_date"),
+                                   positives=scan_report.get("results").get("positives"),
+                                   total=scan_report.get("results").get("total"),
+                                   link=scan_report.get("results").get("permalink"))
 
     except Exception as e:
-        return render_template("virustotal.html", text="error")
+        return render_template("vt-url.html", text="Error: Please try again.")
 
 
 @app.route("/vt/hash/<input>")
@@ -50,10 +54,15 @@ def vt_hash(input):
         input_list = [input_item.strip() for input_item in input.split(',')]
         for hash in input_list:
             scan_report = vt.get_file_report(hash)
-            return render_template("virustotal.html", text=scan_report)
+            return render_template("vt-hash.html", sd=scan_report.get("results").get("scan_date"),
+                                   pos=scan_report.get("results").get("positives"),
+                                   total=scan_report.get("results").get("total"),
+                                   md5=scan_report.get("results").get("md5"),
+                                   sha1=scan_report.get("results").get("sha1"),
+                                   link=scan_report.get("results").get("permalink"))
 
     except Exception as e:
-        return render_template("virustotal.html", text="error")
+        return render_template("vt-hash.html", text="Error: Please try again.")
 
 if __name__ == "__main__":
     app.run()
